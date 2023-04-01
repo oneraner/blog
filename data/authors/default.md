@@ -1,16 +1,13 @@
 ---
-name: Tails Azimuth
-avatar: /static/images/avatar.png
-occupation: Professor of Atmospheric Science
-company: Stanford University
-email: address@yoursite.com
-twitter: https://twitter.com/Twitter
-linkedin: https://www.linkedin.com
-github: https://github.com
+name: Jeff Chao
+avatar: /static/images/avatar.jpg
+occupation: Frontend Engineer
+company: Shoalter
+email: oneraner@gmail.com
+linkedin: https://www.linkedin.com/in/jeffchao0823/
+github: https://github.com/oneraner
 ---
 
-Tails Azimuth is a professor of atmospheric sciences at the Stanford AI Lab. His research interests includes complexity modelling of tailwinds, headwinds and crosswinds.
+我是一位多年的象棋老師，現在是具有兩年經驗的軟體工程師。我運用 JavaScript、Next.js、React.js、TailwindCSS、Node.js 和 MongoDB 等工具來開發前後端應用程式。在我從事軟體工程之前，我擔任過多年的象棋老師，因此擅長教導與帶領新成員加入團隊。我注重打好基礎，熱愛研究新技術，有改善專案效能和導入單元測試的經驗。我希望在團隊中建立一個實事求是、公開透明的文化。
 
-He leads the clean energy group which develops 3D air pollution-climate models, writes differential equation solvers, and manufactures titanium plated air ballons. In his free time he bakes raspberry pi.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+I am a software engineer with two years of experience, who previously worked as a chess teacher for many years. I have expertise in using JavaScript, Next.js, React.js, TailwindCSS, Node.js, and MongoDB to develop full-stack applications. With my teaching experience, I am skilled in mentoring and onboarding new team members. I prioritize building a solid foundation and am passionate about researching new technologies. I have experience in improving project efficiency and implementing unit testing. My goal is to foster a culture of transparency and honesty within a team.
