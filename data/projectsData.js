@@ -1,19 +1,19 @@
 const projectsData = [
   {
-    title: 'A Search Engine',
-    description: `What if you could look up any information in the world? Webpages, images, videos
-    and more. Google has many features to help you find exactly what you're looking
-    for.`,
-    imgSrc: '/static/images/google.png',
-    href: 'https://www.google.com',
-  },
-  {
-    title: 'The Time Machine',
-    description: `Imagine being able to travel back in time or to the future. Simple turn the knob
-    to the desired date and press "Go". No more worrying about lost keys or
-    forgotten headphones with this simple yet affordable solution.`,
-    imgSrc: '/static/images/time-machine.jpg',
-    href: '/blog/the-time-machine',
+    title: 'Meta Wall',
+    description: (
+      <p>
+        2022六角學院 Node.js 直播班作品，決定前端架構。
+        <ul>
+          <li>用 StoryBook 提供視覺測試與預覽。</li>
+          <li>串接 Websocket 實現聊天室功能。</li>
+          <li>技術選擇：Next.js 、TypeScript、Node.js。</li>
+          <li>使用 Tailwind CSS 並自訂樣式。</li>
+        </ul>
+      </p>
+    ),
+    imgSrc: '/static/images/metaWall.jpg',
+    href: 'https://metawall.vercel.app/',
   },
 ]
 
