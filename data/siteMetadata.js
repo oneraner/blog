@@ -1,5 +1,5 @@
 const siteMetadata = {
-  title: 'Next.js Starter Blog',
+  title: 'Jeff Chao Blog',
   author: 'Jeff Chao',
   headerTitle: 'Jeff Chao Blog',
   description: 'A blog created with Next.js and Tailwind.css',
