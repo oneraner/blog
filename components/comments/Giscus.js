@@ -63,7 +63,14 @@ const Giscus = () => {
 
   return (
     <div className="pt-6 pb-6 text-center text-gray-700 dark:text-gray-300">
-      {enableLoadComments && <button onClick={LoadComments}>評論功能尚未串接</button>}
+      {enableLoadComments && (
+        <button
+          className="rounded-md border border-solid border-primary-700 p-2"
+          onClick={LoadComments}
+        >
+          點此留言
+        </button>
+      )}
       <div className="giscus" id={COMMENTS_ID} />
     </div>
   )
