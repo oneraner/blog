@@ -1,0 +1,219 @@
+---
+title: '2023 WebConf 心得'
+date: 2023-08-13T23:30:00Z
+lastmod: '2023-08-13'
+tags: ['web', 'webConf']
+draft: true
+summary: '參加了十年一次的研討會，得到了什麼？'
+layout: PostSimple
+bibliography: references-data.bib
+canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/2023-webConf/
+---
+
+## 前言
+
+轉行軟體工程師快三年了，進入雖然餓不死但懷疑自己還能做什麼？是個人因素？還是環境問題？職業經驗問題？結合聽到的內容，
+究竟我參加這個活動跟其他人參加有什麼差異？共筆跟簡報也大多都有公開，因此嘗試將內容分類，結合自身經驗與講者分享內容，
+整理成各個主要段落，希望對讀者來說能夠獲得些許參考價值。
+
+## 技術與 AI
+
+上半年最火紅的話題莫過於 ChatGPT 及其相關應用，筆者也有在工作中使用，分成以下幾個部分討論：
+
+### DX (Developer Experience)
+
+#### AI 如何增進 DX
+
+越複雜的程式，越需要精準咒語，目前可以做得最好的是翻譯、轉格式，幾乎不會犯錯，或是開發者可以絕對掌控的程式，筆者曾拿來產生計時器，
+產生 gitlab-ci.yaml，效果也相當不錯，Github Copilot 相同。
+
+> 種瓜得瓜、種豆得豆
+
+#### 增進 DX 的一般化方法
+
+1.CI/CD 並且搭配各種 Linter 等自動檢查（法律是道德的底線，CI/CD+Linter 是上版的底線）。
+
+2.完整的 GitHub Flow/Pull Request 等機制。
+
+3.在 Slack 上下指令就可以部署到正式環境。
+
+4.各種監測工具、開發者工具等能買則買 (如 Copilot 等)。
+
+### AI 與創新
+
+為什麼需要創新？因為沒有 AI ，知與不知的資訊不對稱就足以創造差異，但在 AI 時代，凡是已存在的知識都可以輕易獲得，需要創新才能夠創造差異化，
+而這個創新的過程也就是知識管理如何產生價值的過程。
+
+創新的過程：模仿 => 轉換 => 合併。
+
+利用 `DIKW 金字塔`整理知識，Rubby 老師認為，怕忘可以用`筆記`的方式，否則根據艾賓豪斯遺忘曲線，會很快的忘光然後無法促使行為的改變，
+透過`自我提問`的方法內化知識，在這個過程中會產生很多 IP(Intermediate Packets) ，如何利用大量的 IP 內化知識，是創新的關鍵。
+
+以下棋為例:棋手會在腦中整理對當前盤面的`子力`、`位置`、`非贏不可/和棋就好`、`待選的棋步`...等等，這些就是 IP，
+最後選擇一個當下最佳的著法。
+
+### AI 與未知
+
+<Image src="/static/images/2023-webconf-1.jpg" width={650} height={350} alt="matrix-of-ignorance" />
+
+如何處理未知的未知：
+
+1. 運用 AI 技術進行`知識檢索`、`學習`與`測試`。
+2. 回饋。
+3. 組織內的 Mentoring。
+4. 批判性思維
+
+日常可以實行的大概是 4 => 1，透過批判性思維猜測缺少的部分，再利用 AI 增加自己的知識廣度，最後經由社群交流或 Mentoring 進行檢討，
+以近期筆者參加的觀音盃比賽為例，高段組 20 餘位台灣頂尖棋手都會經常性的覆盤檢討，並尋求其餘棋手的回饋。
+
+> 1. Creativity - 創造力
+> 2. Expertise - 專業
+> 3. Critical thinking - 批判性思維
+
+by Kent Beck
+
+Rubby 老師提醒:
+
+> 批判性思維不僅是評估外在知識，也評估自我的觀點和信念
+
+## 技術發展
+
+繼續愛用 Can I Use ，為了 IE 繼承人 Safari。
+
+### Form
+
+input 有幾種 type ？
+
+- text
+- checkbox
+- radio
+- color
+- url
+- email
+- datetime
+- file
+- search
+- text
+- number
+- range
+
+利用原生方法做到：
+
+- stepUp()/stepDown ()
+- RTL/LTR
+- Validation
+
+對原生 form 應用有興趣可以參考 Paul 老師的`鳳·極意`相關簡報及共筆。
+
+### Passkey
+
+利用`非對稱金鑰`達成無密碼登入，可以抵抗釣魚網站跟跨裝置驗證。
+
+套件參考：[Simplewebauthn](https://simplewebauthn.dev/)
+
+對實作有興趣可以參考 Mike Huang 老師的`無密碼時代降臨！使用 Passkeys 打造無密碼驗證服務`相關簡報及共筆。
+
+## 技術與商業
+
+商業有一些小事情：
+
+<Image
+  src="/static/images/2023-webconf-2.jpeg"
+  width={650}
+  height={350}
+  alt="matrix-of-ignorance"
+/>
+
+<Image src="/static/images/2023-webconf-3.png" width={650} height={350} alt="matrix-of-ignorance" />
+
+技術要被管理才能創造價值，價值 = UX + DX。
+
+例如：營運 on call 時，無法處理的問題，可以溝通(work around)，不要讓值班人員特地叫 RD 起來重啟機器，造成白天工作晚上休息被打擾。
+
+> 經常妥協就永遠無法進步
+
+by Gipi
+
+技術架構的管理服從[康威定律](https://zh.wikipedia.org/zh-tw/%E5%BA%B7%E5%A8%81%E5%AE%9A%E5%BE%8B)。
+
+### 溝通
+
+不成熟的溝通：
+
+> 我心理會想說，這個懶鬼
+
+by 不詳
+
+成熟的溝通：
+
+> 好的，OK
+
+by Paul
+
+找出共同目標。
+
+## 職涯發展
+
+因為不錄影所以大部分講者都暢所欲言，請衡量自身情況從下面語錄中選用。
+
+> 如果你可以影響公司的決策，你才是棋手，而非棋子
+
+by Ant
+
+> 1. 把自己放到離價值近的地方
+> 2. 帶人一定要趁早
+> 3. 精進自己的管理能力
+
+by Gipi
+
+> 1. 不要被角色侷限
+> 2. 選擇比努力重要
+
+by PJ
+
+> 試著轉換到有健康文化的工作環境  
+> 「要得到你想要的東西，最可靠的方法。就是讓自己配得上擁有它。」  
+> –《窮查理的普通常識》
+
+by Kat
+
+> 1. 向內看:以自己為目標,不要把贏過所有人當作目標或壓力
+> 2. 向外看:對企業(行業)的熟悉度/適應力是重點
+> 3. 不只人為中心,更要以人類福祉為中心
+> 4. 不定著於科技,學習看得更廣
+> 5. 不慌不忙,細細品嚐勝過囫圇吞棗
+> 6. 面對問題,解決問題,不要等待他人
+> 7. 不要死守你的角色與職稱
+
+過去`感恩`、現在`安頓`、未來`設定目標`，有目標才不會茫然。
+
+by Richard Tsai
+
+## 結語
+
+畢竟兩天的活動，筆者自覺難以避免知識的詛咒(Curse of knowledge)，已知大概會缺乏記憶方法詳細的內容，所以下面附上大量書單，共筆連結，
+有興趣的朋友可以自行參閱，如有任何意見歡迎透過下方評論或其他方法給我回饋。
+
+## 講者推薦書單
+
+特別開一個位置放講者曾推薦過的書或文章，前為書名及博客來(沒有分紅)/文章連結，後為推薦講者：
+
+[打造第二大腦：多一個數位大腦，資訊超載時代的高效能知識管理術](https://www.books.com.tw/products/0010948656) Rubby Lee
+
+[Yes, the 10x (or even 100x!) developers DO exist. But they are not what you think.](https://blog.trueseniordev.com/16-ways-to-become-100x-dev/) PJ
+
+[產品策略怎麼做](https://medium.com/3pm-lab/a-framework-for-product-strategy-87b9198767d5) Kat
+
+[人生四千個禮拜](https://www.books.com.tw/products/0010914255) Kat
+
+[如何改變一個人](https://www.books.com.tw/products/0010894579) Kat Soking
+
+[你可以改變別人](https://www.books.com.tw/products/0010953011) Kat Soking
+
+[象與騎象人](https://www.books.com.tw/products/0010861696) Kat Soking
+
+[南瓜計畫](https://www.books.com.tw/products/0010574340) Richard Lee
+
+## 參考資源
+
+[共筆連結](https://hackmd.io/@webconf/BkImQ0Ds3/%2FwHBNj8NPQamxPecU9VXoHQ)
