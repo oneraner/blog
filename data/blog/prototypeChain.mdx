@@ -1,0 +1,51 @@
+---
+title: 'JavaScript 原型鏈(prototype chain)'
+date: 2023-09-10T20:30:00Z
+lastmod: '2023-09-10'
+tags: ['JavaScript']
+draft: false
+summary: '從被考倒的面試題學習'
+layout: PostSimple
+bibliography: references-data.bib
+canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/prototypeChain/
+---
+
+## 前言
+
+題目就是如何自己實現一個 x function，讓這個 function 跟 array.filter() 一模一樣，當下是一個我知道原理但我不會寫的情況，所以問 GPT 答案記錄一下。
+
+## 實現
+
+```javascript
+// 使用 Array.prototype 在原型上附上 x function
+Array.prototype.x = function (callback) {
+  //使用 this 指向 array，不然要多傳一個 array 當參數
+  return this.reduce((filteredArray, currentItem, index, array) => {
+    if (callback(currentItem, index, array)) {
+      filteredArray.push(currentItem)
+    }
+
+    return filteredArray
+  }, [])
+}
+
+// 範例：
+const numbers = [1, 2, 3, 4, 5, 6]
+const evenNumbers = numbers.x((num, index, array) => num % 2 === 0 && index < 4 && num < array[2])
+
+console.log(evenNumbers) // [2]
+```
+
+## 結論
+
+雖然很酷但是僅限面試時使用，因為 Don't modify objects you don't own，實際上的用途應該是自己做套件封裝 function 用，
+過程中還看了 Prototype Pollution 相關資安問題，也算是藉由這個考題去了解普遍使用 arrow function 後，
+逐漸不再使用的 this 以及原型鏈在開發中的用途。
+
+## 參考資源
+
+[MDN](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+
+[Maintainable JavaScript: Don't modify objects you don't own](https://humanwhocodes.com/blog/2010/03/02/maintainable-javascript-dont-modify-objects-you-down-own/)
+
+[Prototype Pollution](https://blog.huli.tw/2021/09/29/prototype-pollution/)
