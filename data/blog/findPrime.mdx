@@ -1,0 +1,82 @@
+---
+title: '找質數思路與算法'
+date: 2024-01-19T17:00:00Z
+lastmod: '2024-01-19'
+tags: ['演算法']
+draft: false
+summary: '如何在指定區間找所有質數'
+layout: PostSimple
+bibliography: references-data.bib
+canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/ultralearning/
+---
+
+## 前言
+
+現在解題好像也越來越競爭了，變成都要事先練過，然後比輸出速度，少了些慢慢思考凝聚想法的機會，只好來寫筆記。
+
+## 思路與答案
+
+題目就是給一個正整數 N，找出 1~N 中間有幾個質數。
+
+一開始無腦算法就是從 1~N 每個數都除以從 N 到 1 的數，然後開始思考優化，基礎就是從 2 開始找，因為 1 跟 N 都可以整除 N，所以先去掉 2、3、5、7 這些常見的質數的倍數，因為質數 \* 任意值必然不會是質數，
+優化判斷一個數是否為質數？迴圈上限的部分：如果 number 有一個大於根號 number 的因數，則必然存在一個比根號 number 小的因數，所以在大於根號 number 的部分搜尋無意義可以省略。
+
+```javascript
+const isPrime = (number) => {
+  if (number < 2) return false
+  for (let i = 2; i <= Math.sqrt(number); i++) {
+    if (number % i === 0) {
+      return false
+    }
+  }
+  return true
+}
+
+const countPrimesInRange = (N) => {
+  const primesCount = Array.from({ length: N }, (_, index) => index + 1)
+    .slice(1) // Skip 1, as 1 is not a prime number
+    .reduce((count, currentNumber) => {
+      if (isPrime(currentNumber)) {
+        return count + 1
+      }
+      return count
+    }, 0)
+
+  return primesCount
+}
+
+const result = countPrimesInRange(10)
+console.log(result) // 4
+```
+
+再優化的方式為埃拉托斯特尼篩法，簡稱埃氏篩，先建立一個 1~N 的陣列，將所有當前找到的質數的倍數標記為合數，合數也必然不是質數，令找到的質數為 p，標記時可直接從 p^2 開始標記，因為如果存在比 p^2 更小的 p \* m
+則 m 必然小於 p，所以在 m 或 m 的因數標記時已經標記，最後 filter 標記完的結果則可以得到解答。
+
+```javascript
+const sieveOfEratosthenes = (N) => {
+  const isPrime = Array.from({ length: N + 1 }, (_, index) => index > 1)
+
+  for (let i = 2; i <= Math.sqrt(N); i++) {
+    if (isPrime[i]) {
+      for (let j = i * i; j <= N; j += i) {
+        isPrime[j] = false
+      }
+    }
+  }
+
+  const primesCount = isPrime.slice(2).filter((value) => value).length
+
+  return primesCount
+}
+
+const result = sieveOfEratosthenes(10)
+console.log(result) // 4
+```
+
+### 參考資料：
+
+[維基百科-埃拉托斯特尼篩法](https://zh.wikipedia.org/zh-tw/%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC%E7%AD%9B%E6%B3%95)
+
+```
+
+```
