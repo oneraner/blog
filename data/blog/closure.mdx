@@ -1,0 +1,60 @@
+---
+title: '面試題：閉包'
+date: 2024-01-26T17:00:00Z
+lastmod: '2024-01-26'
+tags: ['JavaScript']
+draft: false
+summary: ''
+layout: PostSimple
+bibliography: references-data.bib
+canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/closure/
+---
+
+## 前言
+
+也是面試遇到的題目，懂原理也會寫，但花有點多時間也有點醜。
+
+## 思路與答案
+
+題目：
+
+建立一個函式使輸出如下：
+
+```javascript
+console.log(argsCount()) // 0
+console.log(argsCount(2)()) // 1
+console.log(argsCount(3)(4)()) // 2
+console.log(argsCount(5, 6, 7)()) // 3
+console.log(argsCount(1)(2, 3)(4)()) // 4
+console.log(argsCount(1)) // function
+console.log(argsCount(1)(2, 3)(4)) // function
+```
+
+首先看到多個 ()，就必然是 return 一個 function，閱讀題目得知輸出有幾種：
+
+1.若執行時沒有參數，則輸出曾經出現過的參數數量。
+
+2.如果參數中有出現過 1，則 return function 。
+
+3.如果以上情況都不存在，則 return function 。
+
+使用 ...args 統計未知的參數數目，如果是 0 ， 則 early return 0 。
+
+利用 args 傳入 countArguments function 導致會被記憶起來的特性儲存 args 。
+
+最後把條件全部寫上去就大功告成。
+
+```javascript
+function argsCount(...args) {
+  if (args.length === 0) return 0
+
+  function countArguments(...newArgs) {
+    if (newArgs.length === 0) return args.length
+    if (newArgs.includes(1)) return countArguments
+    args.push(...newArgs)
+    return countArguments
+  }
+
+  return countArguments
+}
+```
