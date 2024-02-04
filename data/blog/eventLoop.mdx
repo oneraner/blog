@@ -1,0 +1,126 @@
+---
+title: '解釋 JavaScript 的 Event Loop'
+date: 2024-02-04T14:00:00Z
+lastmod: '2024-02-04'
+tags: ['JavaScript']
+draft: false
+summary: '筆記順便練習 event loop 的敘述'
+layout: PostSimple
+bibliography: references-data.bib
+canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/event-loop/
+---
+
+## Stack Queue
+
+JavaScript 是個單執行緒語言，因此一次只能做一件事，Queue 就是一個等待執行的列表，Stack 就是每次執行的任務，當一個 Stack 執行完畢的時候，就會從 Queue 裡面找下一個 Stack 來執行。
+
+```javaScript
+function a() {
+  console.log('a')
+}
+function b() {
+  console.log('b')
+}
+
+a()
+b()
+
+// a => b
+```
+
+如上例，初始的 Stack 為 a() b() , Queue 是空的，因此結果就是依序執行 a => b。
+
+## Macro Micro
+
+除了簡單的依序執行 Stack 這個規則以外，還分為 Macro 及 Micro 兩種排序規則，如果是 Macro，如同一般的 Stack 排序，例如 setTimeout 就是一種 Macro Task。
+
+```javaScript
+function a() {
+  setTimeout(()=>{console.log('aa')},0)
+  console.log('a')
+}
+function b() {
+  console.log('b')
+}
+
+a()
+b()
+
+// a => b => aa
+```
+
+如上例，初始的 Stack 為 a() b() , 但差別是執行到了 setTimeout 的時候，在 Queue 裡面增加了一個 Stack 執行 console.log('aa')，因此執行的順序為 a => b => aa。
+
+Promise 是 Micro Task 的代表，Micro Task 會排在當前 Stack 的後面，每當 JavaScript 執行完當前 Stack，會優先執行 Micro Task 的 Queue，然後才執行下一個 Stack。
+
+```javaScript
+function a() {
+  setTimeout(()=>{ console.log('aa')},0)
+  console.log('a')
+  Promise.resolve().then(function () {
+    console.log("aaa");
+  });
+}
+function b() {
+  console.log('b')
+}
+
+a()
+b()
+
+// a => b => aaa => aa
+```
+
+將前例加上一個 Promise，如上所述，先將 aa 與 aaa 移出這個 Stack，所以會先顯示 a => b，aaa 是 Promise，所以 Micro Task 會優先於 Macro Task 執行，所以最後順序就是 a => b => aaa => aa
+
+下例則是加上所有 Macro 與 Micro Task，更複雜的可能心算或畫圖依照規則排好，之後問題就迎刃而解。
+
+```javaScript
+function a() {
+  setTimeout(()=>{ console.log('aa')},0)
+  console.log('a')
+  Promise.resolve().then(function () {
+    console.log("aaa");
+  });
+}
+function b() {
+   setTimeout(()=>{ console.log('bb')},0)
+  console.log('b')
+  Promise.resolve().then(function () {
+    console.log("bbb");
+  });
+}
+
+a()
+b()
+
+// 防雷線 --------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// a => b => aaa => bbb => aa => bb
+```
+
+## 參考資料
+
+[explainthis 請說明瀏覽器中的事件循環 (Event Loop)](https://www.explainthis.io/zh-hant/swe/what-is-event-loop)
