@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import Image from './Image'
 import Link from './Link'
 
@@ -12,16 +11,18 @@ const Card = ({ title, description, imgSrc, href }) => (
       {imgSrc &&
         (href ? (
           <Link href={href} aria-label={`Link to ${title}`}>
-            <img
+            <Image
               alt={title}
               src={imgSrc}
+              layout="fill"
               className="w-full object-cover object-top md:h-36 lg:h-48"
             />
           </Link>
         ) : (
-          <img
+          <Image
             alt={title}
             src={imgSrc}
+            layout="fill"
             className="w-full object-cover object-top md:h-36 lg:h-48"
           />
         ))}
