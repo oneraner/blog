@@ -11,20 +11,24 @@ const Card = ({ title, description, imgSrc, href }) => (
       {imgSrc &&
         (href ? (
           <Link href={href} aria-label={`Link to ${title}`}>
+            <div className="relative h-48">
+              <Image
+                alt={title}
+                src={imgSrc}
+                layout="fill"
+                className="w-full object-cover object-top"
+              />
+            </div>
+          </Link>
+        ) : (
+          <div className="relative h-48">
             <Image
               alt={title}
               src={imgSrc}
               layout="fill"
               className="w-full object-cover object-top md:h-36 lg:h-48"
             />
-          </Link>
-        ) : (
-          <Image
-            alt={title}
-            src={imgSrc}
-            layout="fill"
-            className="w-full object-cover object-top md:h-36 lg:h-48"
-          />
+          </div>
         ))}
       <div className="p-6">
         <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">
