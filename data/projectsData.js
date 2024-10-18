@@ -12,7 +12,7 @@ const projectsData = [
         </ul>
       </p>
     ),
-    imgSrc: '/static/images/metaWall.jpg',
+    imgSrc: '/oneraner/blog/raw/master/public/static/images/metaWall.jpg',
     href: 'https://metawall.vercel.app/',
   },
 ]
