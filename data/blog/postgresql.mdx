@@ -1,0 +1,301 @@
+---
+title: '2024 後端工程師 - 資料庫體驗營 預習影音課程 作業詳解'
+date: 2024-10-29T14:00:00Z
+lastmod: '2024-10-29'
+tags: ['PostgreSQL']
+draft: false
+summary: '基礎練習題筆記'
+layout: PostSimple
+bibliography: references-data.bib
+canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/postgresql/
+---
+
+## 前言
+
+為了抽獎(X)，非本科工程師平常沒機會接觸資料庫，所以來學一下，如何分辨一個軟體工程師偏前端還是後端，目前的感想就是 CSS 跟資料庫操作，這次選用的 PostgreSQL 也是蠻主流的，NoSQL 之前有用過 MongoDB。
+
+## 使用 PG SQL 建立環境
+
+測試答案有沒有寫對，將題目附上的測試資料貼到網站內按 Run。
+
+```sql
+CREATE TABLE products (
+   name VARCHAR(100),         -- 商品名稱
+   price INTEGER,            -- 原價
+   discount_price INTEGER,    -- 優惠價
+   stock INTEGER,            -- 庫存數量
+   category VARCHAR(50),      -- 商品分類
+   status VARCHAR(20)         -- 商品狀態
+);
+
+INSERT INTO products (name, price, discount_price, stock, category, status) VALUES
+   ('北歐風雙人沙發', 39900, 35900, 3, '沙發', 'active'),
+   ('貓抓皮L型沙發', 58900, 52900, 1, '沙發', 'active'),
+   ('典雅三人座沙發', 42800, 42800, 5, '沙發', 'active'),
+   ('工業風電視櫃', 5900, 4900, 12, '櫃子', 'active'),
+   ('簡約書櫃', 3500, 3500, 8, '櫃子', 'active'),
+   ('玄關鞋櫃', 2900, 2900, 15, '櫃子', 'active'),
+   ('日式雙人床架', 12000, 11200, 6, '床架', 'active'),
+   ('掀床五尺雙人床', 19900, 18900, 2, '床架', 'active'),
+   ('兒童床架', 8900, 8900, 0, '床架', 'inactive'),
+   ('電腦辦公椅', 4500, 3900, 20, '椅子', 'active'),
+   ('餐椅四入組', 6000, 5200, 8, '椅子', 'active'),
+   ('北歐風餐桌', 15800, 14800, 4, '桌子', 'active'),
+   ('實木咖啡桌', 3200, 2900, 10, '桌子', 'active'),
+   ('電競書桌', 8900, 8900, 0, '桌子', 'inactive');
+```
+
+## 題目及詳解
+
+### 基礎比較運算：
+
+#### 情境 1：單品查詢
+
+客人：「這張北歐風雙人沙發多少錢？」
+
+小美想查：想找到這張沙發的價格和庫存
+
+詳解:
+
+北歐風雙人沙發是 name，價格跟庫存是 price 跟 stock，都在同一張 products table 裡面，所以找出這三個欄位再篩選出名稱是北歐風雙人沙發的產品。
+
+```sql
+SELECT name, price, stock FROM products
+WHERE name = '北歐風雙人沙發';
+```
+
+#### 情境 2：價格比較
+
+客人：「請列出 5000 元以下的櫃子有哪些？」
+
+小美想查：找出櫃子類且價格在 5000 以下的商品
+
+詳解：
+
+櫃子是一種分類(category)，價格是 price，name 用來給客人看是哪些櫃子，所以一樣是找三個欄位再加入 WHERE 跟 < 運算子。
+
+```sql
+SELECT name, price, category FROM products
+WHERE price < 5000;
+```
+
+#### 情境 3：庫存確認
+
+客人：「日式雙人床架還有貨嗎？」
+
+小美想查：確認日式雙人床架的庫存狀況
+
+詳解：
+
+跟前面很像，差別是`有貨嗎？`要把商業邏輯轉換成程式邏輯，通常有沒有貨就是存貨(stock)大於 0，但是公司可能有獨特的商業邏輯，在公司切記不要想當然爾，要跟 PM 問清楚。
+
+```sql
+SELECT name, stock FROM products
+WHERE name = '日式雙人床架' AND stock > 0
+```
+
+### 邏輯運算 AND：
+
+#### 情境 4：預算內的商品
+
+客人：「想找 4 萬以下，而且有現貨的沙發」
+
+小美想查：要同時符合：是沙發、4 萬以下、有庫存
+
+詳解：
+
+4 萬是價格(price)，有現貨就用上面的定義 stock > 0，沙發是一種產品分類(category)。
+
+```sql
+SELECT name, category, price, stock FROM products
+WHERE price <= 40000 AND stock > 0 AND category = '沙發'
+```
+
+#### 情境 5：特價且有貨
+
+客人：「沙發有哪些特價且現貨的品項？」
+
+小美想查：要找到沙發類且有特價（原價大於優惠價）且還有庫存的商品
+
+詳解：
+
+特價的定義有寫是原價大於優惠價，沙發是一種分類(category)，剩下同上面題目相同的寫法。
+
+```sql
+SELECT name, category, price, discount_price, stock FROM products
+WHERE price > discount_price AND stock > 0 AND category = '沙發'
+```
+
+### 邏輯運算 OR：
+
+#### 情境 6：多分類查詢
+
+客人：「我要找櫃子或桌子」
+
+小美想查：要找出櫃子類或桌子類的商品
+
+詳解：
+
+同上，只是加入 OR 運算子。
+
+```sql
+SELECT name, category FROM products
+WHERE category = '櫃子' OR category = '桌子'
+```
+
+#### 情境 7：指定商品
+
+客人：「北歐風雙人沙發和貓抓皮 L 型沙發哪個還有貨？」
+
+小美想查：要找出這兩張特定沙發的庫存狀況
+
+詳解：
+
+OR 後面還有指令，因此要用 () 將兩個 OR 條件括起來。
+
+```sql
+SELECT name, stock FROM products
+WHERE (name = '北歐風雙人沙發' OR name = '貓抓皮L型沙發') AND stock > 0;
+```
+
+### IN 運算：
+
+#### 情境 8：多分類查詢
+
+客人：「客廳的家具有哪些？我要看沙發、櫃子跟桌子」
+
+小美想查：要找出沙發、櫃子和桌子這三種分類的商品
+
+詳解：
+
+IN 運算子可以替代多個 OR，用`，`區隔每個條件。
+
+```sql
+SELECT name, category FROM products
+WHERE category IN ('沙發', '櫃子', '桌子');
+```
+
+#### 情境 9：特定商品
+
+客人：「電腦辦公椅和餐椅四入組的價格是多少？」
+
+小美想查：要找出這兩款椅子的價格
+
+詳解：
+
+使用 IN 或 OR 都可以找出這兩個的價格。
+
+```sql
+SELECT name, price FROM products
+WHERE name IN ('電腦辦公椅', '餐椅四入組');
+```
+
+### BETWEEN：
+
+#### 情境 10：價格區間
+
+客人：「想找 10000 到 20000 之間的商品有哪些？」
+
+小美想查：列出這個價格區間的所有商品
+
+詳解：
+
+語法是 BETWEEN `A` AND `B`。
+
+```sql
+SELECT name, price FROM products
+WHERE price BETWEEN 10000 AND 20000;
+```
+
+#### 情境 11：庫存區間
+
+主管：「請列出庫存在 5 到 15 之間的商品」
+
+小美想查：列出庫存數量在這個範圍的商品
+
+詳解：
+
+把價格(price)換成存貨(stock)而已。
+
+```sql
+SELECT name, stock FROM products
+WHERE stock BETWEEN 5 AND 15;
+```
+
+### NOT IN：
+
+#### 情境 12：排除商品
+
+主管：「列出除了沙發和床架以外的商品」
+
+小美想查：要找出不是沙發和床架的商品
+
+詳解：
+
+IN 改成 NOT IN。
+
+```sql
+SELECT name, category FROM products
+WHERE category NOT IN ('沙發', '床架');
+```
+
+### 更新和刪除：
+
+#### 情境 13：調整價格
+
+主管：「北歐風雙人沙發要調降 2000 元」
+
+小美想查：要如何更新這張沙發的價格
+
+詳解：
+
+要先表示更新哪張表的哪個欄位成什麼值，然後才去選要更新哪些行，順序不可以顛倒。
+
+```sql
+UPDATE products
+SET price = price - 2000
+WHERE name = '北歐風雙人沙發';
+```
+
+#### 情境 14：更新庫存
+
+主管：「電腦辦公椅進了 5 張」
+
+小美想查：要如何增加這款椅子的庫存數量
+
+詳解：
+
+遵照上面的規則，先寫存貨增加 5 的邏輯，再更新在電腦辦公椅這行。
+
+```sql
+UPDATE products
+SET stock = stock + 5
+WHERE name = '電腦辦公椅';
+```
+
+#### 情境 15：清除資料
+
+主管：「要清掉兒童床架和電競書桌的資料」
+
+小美想查：要如何刪除這兩項商品
+
+詳解：
+
+DELETE 要 FROM `table` ，是固定語法。
+
+```sql
+DELETE FROM products
+WHERE name IN ('兒童床架', '電競書桌');
+```
+
+## 報名連結
+
+有興趣練的話不知道隔幾年哪一季會辦~
+
+[六角學院-資料庫體驗營](https://www.hexschool.com/2024/10/02/2024-10-02-backend-database-camping/)
+
+## 參考資料
+
+[PostgreSQL](https://www.postgresql.org/)
+
+[PG SQL](https://pg-sql.com/)
