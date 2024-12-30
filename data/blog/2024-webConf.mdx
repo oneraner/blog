@@ -1,0 +1,151 @@
+---
+title: '2024 WebConf 心得'
+date: 2024-12-30T23:30:00Z
+lastmod: '2024-12-30'
+tags: ['web', 'webConf']
+draft: false
+summary: 'AI 時代下的 web 工程師'
+layout: PostSimple
+bibliography: references-data.bib
+canonicalUrl: https://blog-orcin-seven.vercel.app/blog/2024-webConf/
+---
+
+## 前言
+
+2024 是 LLM(Large Language Model) 迅速發展的一年，象棋界的 AI 早已有成熟的商業產品，但這個 AI 如何創造商業價值，仍是現今持續探討的議題，
+其中也包含價值是不是包含取代工程師省下的人事成本，所以持續觀察這個熱潮的走向，究竟是要等失業上街抗議、轉行跑路、或是仍然能夠發掘新的職能，
+將這屆的主題總結為" AI 時代下的 web 工程師"。
+
+## 職涯
+
+### 作為一個 Giver
+
+Give and Take 之前有看過，失敗的 Giver 跟成功 Giver 決定性的差別能不能設定並堅持自己的`底線`，例如 TonyQ 喜歡以團隊健康度為判斷標準，如果團隊健康度持續不見起色就會萌生去意。
+
+### 專注度
+
+有賴於筆者本身的背景，不用番茄鐘也沒問題，但如果對於專注上有問題，目前較好的解法就是刻意練習到番茄鐘最少 `25` 分鐘。
+
+### 領域
+
+思考自己的經歷與知識可以補充什麼來延伸自己的領域，追求技術深度往 Staff Engineer 走的話，外商公司比較有這類的機會，台商大部分是混合或純管理職。
+
+### 團隊
+
+- 突破一個盲點：團隊是一個盲盒，通常不是自選而是`抽卡遊戲`，`公司等級`影響出卡機率。
+
+- 以對人的關心為本，領導 `5` 人以下團隊時，以身作則與 1:1 meeting 就可以有不錯的效果，當人數膨脹到 `35` 人以上的時候，塑造共同的敵人就不可行，而是要轉為如何創造共識，達成有紀律的行動。
+
+- code review：找 bug 的價值不高，同步 coding style 跟避免重複工具的價值更高。
+
+### 價值
+
+- 對公司提供的價值
+
+持續尋找展現價值或發掘替公司創造價值的機會。
+
+- 主管對你的認同（價值）
+
+雖然有聽到講者的建議是過度溝通講到主管煩，不過應該是要看團隊人數跟工作內容，如果 manager 對 manager 可能工作內容就是開會，但 engineer 對 manager 可能就不能用這種方式。
+
+## 產品
+
+- 需求：挖掘隱藏需求，沒有回答到正確的問題就沒有好的結果，如果接案或創業，收錢是一個很好的方式，馬上可以去掉很多無病呻吟跟不會付錢的使用者產生的假需求，達成專注服務早期用戶的目標。
+
+- 技術：產品的技術面盡量用現成，coding style 比較好把握、省下開發時間。
+
+- 看見全貌：向上管理，跟上層預期不符導致專案缺乏資源腰斬是經常失敗的原因。
+
+## 技術
+
+### Frontend
+
+#### 有限狀態機：
+
+奶綠用簡單紅綠燈範例講解從 XDate 到 RxJS 的演進，function programming 避免難以測試的 side effect 為內容，所以利用好不好寫測試、有限狀態機這些方法可以幫助判斷程式有沒有多餘的 side effect。
+
+#### Virtual DOM：
+
+從原生寫到現今的前端主流框架，最大的差異就是 Virtual DOM 的觀念，React 持續以 Virtual DOM 為基礎的發展；Vue 正打算替換掉 Virtual DOM 增加效能與 Server 的表現。
+
+#### ESLint：
+
+最近出了 ESLint 9.0，增加了不少 DX，作者本人支語翻譯會卡住蠻好笑的，不過大家應該都來拜神拿貼紙的，工作上要如何說服上司同事，跟有時間將 ESLint 升級就是如現場投票，不到 10% 有升級跟換 config。
+
+### DevOps
+
+AI 在 DevOps 的表現仍然欠佳，經驗跟官方文件還是比較重要，因為 AI 會受限於系統、版本因素，這點筆者也深有體會，即使問得很詳細，但 AI 可能還是會給過時的版本答案，講者認為在 DevOps 的領域，
+自己的技術、經驗積累仍然非常重要，AI 可能可以給方向，但如果缺少基礎，很容易隨著 AI 起舞，結果浪費時間。
+
+## 結語
+
+- 從大部分講者的分享來看，一開始用 AI 在簡單的例子上可能很快很方便，但實際走深之後，需要依據現實判斷 AI 有沒有幻覺，或是選擇脫離 AI，AI 取代工程師這件事短時間應不會發生，在判斷 AI 的正確性上，
+  將技術走深很有幫助。
+
+- 在通靈跟坦隕石上，人的價值還是無可取代的，畢竟 AI 是講越詳細效果越好。
+
+- 筆者的每年學習經費(包含買書、研討會、線上課程、內容訂閱)越來越高了，但如果能夠把學習目標放在語言或程式基礎上，相信還是成功的投資。
+
+## 筆者參與的講題一覽
+
+有限狀態機與 RxJS - 奶綠茶
+
+個人專案到產品：善用 AI 工具打造可盈利產品 - 王鵬傑 PJ Wang
+
+來一場兼顧程式碼品質以及開發效率的 Code Review - Fin
+
+從技術專才到領導者: 1 到 100 人的管理之路 - Singz Hsieh
+
+十年回首：React 的過去、現在與未來發展 - Zet
+
+《天下》如何思考數位敘事？從流程到技術大公開 - 李郁欣／楊時鈞 Steven Yeo
+
+網站專案時程的挑戰跟威脅 - 王景弘
+
+AI+商業思維：軟體工程師如何擁抱趨勢，提升職場價值 - 游舒帆
+
+談組織內部的產品創業：由技術選型、優劣勢分析、階段性目標再到團隊設計 - 高玉璁 Samuel
+
+擁抱漸進式體驗 — 設計驅動企業改革動能 - 郭藺瑩 Lydia Kuo
+
+ESLint One for All Made Easy - Anthony Fu
+
+從零到頂尖：無懈可擊的網頁設計 - 設計師勞哥
+
+DevOps 與 GenAI：在人工智慧時代的未來之路 - 邱宏瑋
+
+接案失敗學：前端後端設計端，我還要具備什麼端才能出來江湖闖盪？談小白鼠闖入黑森林被 XXX 的淒慘故事 - Taiming
+
+工程師成長之路：由時間管理到職涯規劃 - 李智樺 Ruddy
+
+## 講者推薦書單
+
+[The Minimalist Entrepreneur](https://www.books.com.tw/products/F018166217?srsltid=AfmBOop3QY0SyAYfrFFXc7miV9HePkfIqR9sy5P5Dja6FDE6fXMjYbAI) PJ
+
+Make: Bootstrapper’s handbook PJ
+
+[The SaaS Playbook: Build a Multimillion-Dollar Startup Without Venture Capital](https://www.amazon.com/-/zh_TW/Rob-Walling-ebook/dp/B0CCQB26RS) PJ
+
+[從 A 到 A+](https://www.books.com.tw/products/0010845587?gad_source=1&gclid=CjwKCAiAg8S7BhATEiwAO2-R6iFkdvM2hQrn5XU12kLz7z9IC11_wANPUdjMYC58Yt4kWC4zhaBIIRoCDk0QAvD_BwE) Singz
+
+[薩提爾的對話練習](https://www.books.com.tw/products/0010890149?srsltid=AfmBOoo8xa5xeM7oAtaJ80WT5YQD-vMDXmh89RtiMWf9OIQ9QRRwcMb5) Singz
+
+[教練](https://www.books.com.tw/products/E050069059?srsltid=AfmBOorlXdDVQfgrl3AIfQhliiE52ThuaeUzAdDdc0JrffUcBue_4msU) Singz
+
+[Staff 工程師之路](https://www.books.com.tw/products/0010980200?gad_source=1&gclid=CjwKCAiAg8S7BhATEiwAO2-R6koPTLGzGiZTBOUAQ-GzmF5_vfXbbGsBD-UgdHlYpzceYninDKnXfBoCdRUQAvD_BwE) Ruddy
+
+[Give and Take](https://www.books.com.tw/products/F013141849?srsltid=AfmBOoqFOhENhQ8JL2SdxhmJyZopTS_YiL5ehQLrrwTiCPC3N75z8A9v) Ruddy
+
+[打造第二大腦](https://www.books.com.tw/products/0010948656?gad_source=1&gclid=CjwKCAiAg8S7BhATEiwAO2-R6rCoKpwp6Eon2SghTR3Iu6wv7QHXXeAbD3NnguL7xKGrxz7R9kkzuRoC5q8QAvD_BwE) Ruddy
+
+[單核工作法圖解](https://www.books.com.tw/products/CN11485655?srsltid=AfmBOoqYhwEPZZHGZAlwGtf5qbqnR0AuW6KekvOIx3N90Sm2r2g2nO7B) Ruddy
+
+[產品領導人之道](https://www.books.com.tw/products/0011004853?gad_source=1&gclid=CjwKCAiAg8S7BhATEiwAO2-R6sDrMTwBpE2m67EVvVroWkJXVPP3aIwhKF5-U702G625AIncFHBYzRoCoa0QAvD_BwE) 小雨
+
+[做自己的生命設計師](https://www.books.com.tw/products/0010809012?gad_source=1&gclid=CjwKCAiAg8S7BhATEiwAO2-R6nj51pKow-rOOd9-2nBSqIs7EXrtB5Tpc1Fm-67nF3gYQ0a0pwYaohoCrOYQAvD_BwE) 小雨
+
+[收穫心態](https://www.books.com.tw/products/0010956147?gad_source=1&gclid=CjwKCAiAg8S7BhATEiwAO2-R6n_S3NtJ90oAGHnewCY-LtE5hCBfF0RlHUX2z-5KKlgzQ_nU7zQJwBoC5rUQAvD_BwE) 小雨
+
+## 參考資源
+
+[共筆連結](https://hackmd.io/@webconf/BJ2N6ksMke/%2FiYt5D7Z6Tw6ZCV0jP-DY6g)
