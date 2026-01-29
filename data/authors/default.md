@@ -1,4 +1,5 @@
 ---
+type: Authors
 name: Jeff Chao
 avatar: /static/images/avatar.jpg
 occupation: React Developer
