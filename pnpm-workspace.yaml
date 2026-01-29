@@ -1,6 +1,0 @@
-onlyBuiltDependencies:
-  - contentlayer2
-  - esbuild
-  - protobufjs
-  - sharp
-  - unrs-resolver
