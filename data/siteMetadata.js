@@ -1,4 +1,4 @@
-/** @type {import("pliny/config").PlinyConfig } */
+/** @type {import("./lib/types").SiteMetadata} */
 const siteMetadata = {
   title: 'Jeff Chao Blog',
   author: 'Jeff Chao',

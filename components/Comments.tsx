@@ -1,22 +1,50 @@
 'use client'
 
-import { Comments as CommentsComponent } from 'pliny/comments'
-import { useState } from 'react'
+import { useTheme } from 'next-themes'
+import Giscus from '@giscus/react'
 import siteMetadata from '@/data/siteMetadata'
 
-export default function Comments({ slug }: { slug: string }) {
-  const [loadComments, setLoadComments] = useState(false)
+interface CommentsProps {
+  slug: string
+}
 
-  if (!siteMetadata.comments?.provider) {
+export default function Comments({ slug }: CommentsProps) {
+  const { theme, resolvedTheme } = useTheme()
+  const commentsTheme =
+    siteMetadata.comments?.giscusConfig?.themeURL ||
+    (theme === 'dark' || resolvedTheme === 'dark'
+      ? siteMetadata.comments?.giscusConfig?.darkTheme || 'transparent_dark'
+      : siteMetadata.comments?.giscusConfig?.theme || 'light')
+
+  if (!siteMetadata.comments?.provider || siteMetadata.comments.provider !== 'giscus') {
     return null
   }
+
+  const {
+    repo,
+    repositoryId,
+    category,
+    categoryId,
+    mapping,
+    reactions,
+    metadata,
+    lang,
+  } = siteMetadata.comments.giscusConfig
+
   return (
-    <>
-      {loadComments ? (
-        <CommentsComponent commentsConfig={siteMetadata.comments} slug={slug} />
-      ) : (
-        <button onClick={() => setLoadComments(true)}>Load Comments</button>
-      )}
-    </>
+    <Giscus
+      id="comments"
+      repo={repo as `${string}/${string}`}
+      repoId={repositoryId}
+      category={category}
+      categoryId={categoryId}
+      mapping={mapping as 'pathname' | 'url' | 'title' | 'og:title' | 'specific' | 'number'}
+      reactionsEnabled={reactions}
+      emitMetadata={metadata}
+      inputPosition="top"
+      theme={commentsTheme}
+      lang={lang}
+      loading="lazy"
+    />
   )
 }

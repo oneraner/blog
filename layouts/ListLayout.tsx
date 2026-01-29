@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { formatDate } from 'pliny/utils/formatDate'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog } from 'contentlayer/generated'
+import { formatDate } from '@/lib/utils/formatDate'
+import type { CoreContent } from '@/lib/utils/contentlayer'
+import type { Blog } from '@/lib/types'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
@@ -43,6 +43,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           <Link
             href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
             rel="prev"
+            className="text-secondary-500 hover:text-secondary-600 dark:hover:text-secondary-400"
           >
             Previous
           </Link>
@@ -55,11 +56,9 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
             Next
           </button>
         )}
-        {nextPage && (
-          <Link href={`/${basePath}/page/${currentPage + 1}`} rel="next">
-            Next
-          </Link>
-        )}
+        <Link href={`/${basePath}/page/${currentPage + 1}`} rel="next" className="text-secondary-500 hover:text-secondary-600 dark:hover:text-secondary-400">
+          Next
+        </Link>
       </nav>
     </div>
   )
