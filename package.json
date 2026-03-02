@@ -12,25 +12,26 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@giscus/react": "^3.1.0",
     "@headlessui/react": "2.2.0",
-    "@next/bundle-analyzer": "15.2.4",
+    "@next/bundle-analyzer": "16.1.6",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/postcss": "^4.0.5",
     "@tailwindcss/typography": "^0.5.15",
     "body-scroll-lock": "^4.0.0-beta.0",
-    "contentlayer2": "0.5.5",
     "esbuild": "0.25.2",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.2",
     "hast-util-from-html-isomorphic": "^2.0.0",
     "image-size": "2.0.1",
-    "next": "15.2.4",
-    "next-contentlayer2": "0.5.5",
+    "katex": "^0.16.28",
+    "kbar": "0.1.0-beta.48",
+    "next": "16.1.6",
+    "next-mdx-remote-client": "^2.1.7",
     "next-themes": "^0.4.6",
-    "pliny": "0.4.1",
     "postcss": "^8.4.24",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "reading-time": "1.5.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-citation": "^2.3.0",
@@ -57,7 +58,7 @@
     "@typescript-eslint/parser": "^8.12.0",
     "cross-env": "^7.0.3",
     "eslint": "^9.14.0",
-    "eslint-config-next": "15.2.4",
+    "eslint-config-next": "16.1.6",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.0",
     "globals": "^15.12.0",
@@ -73,6 +74,14 @@
     ],
     "*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
       "prettier --write"
+    ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "protobufjs",
+      "sharp",
+      "unrs-resolver"
     ]
   }
 }

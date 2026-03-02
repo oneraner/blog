@@ -1,11 +1,18 @@
-import { NewsletterAPI } from 'pliny/newsletter'
-import siteMetadata from '@/data/siteMetadata'
+// Newsletter API placeholder - provider not configured
+// Add your newsletter provider configuration here if needed
 
 export const dynamic = 'force-static'
 
-const handler = NewsletterAPI({
-  // @ts-ignore
-  provider: siteMetadata.newsletter.provider,
-})
+export async function GET() {
+  return new Response(JSON.stringify({ message: 'Newsletter not configured' }), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  })
+}
 
-export { handler as GET, handler as POST }
+export async function POST() {
+  return new Response(JSON.stringify({ message: 'Newsletter not configured' }), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  })
+}

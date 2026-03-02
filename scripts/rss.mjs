@@ -1,13 +1,51 @@
-import { writeFileSync, mkdirSync } from 'fs'
+import { writeFileSync, mkdirSync, readdirSync, readFileSync } from 'fs'
 import path from 'path'
 import { slug } from 'github-slugger'
-import { escape } from 'pliny/utils/htmlEscaper.js'
+import matter from 'gray-matter'
 import siteMetadata from '../data/siteMetadata.js'
 import tagData from '../app/tag-data.json' with { type: 'json' }
-import { allBlogs } from '../.contentlayer/generated/index.mjs'
-import { sortPosts } from 'pliny/utils/contentlayer.js'
 
 const outputFolder = process.env.EXPORT ? 'out' : 'public'
+
+// Simple HTML escape
+function escape(str) {
+  if (!str) return ''
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
+// Read all blog posts
+function getAllPosts() {
+  const blogDir = path.join(process.cwd(), 'data', 'blog')
+  const files = readdirSync(blogDir).filter((f) => f.endsWith('.mdx') || f.endsWith('.md'))
+
+  return files.map((filename) => {
+    const fullPath = path.join(blogDir, filename)
+    const fileContents = readFileSync(fullPath, 'utf8')
+    const { data } = matter(fileContents)
+    const postSlug = filename.replace(/\.mdx?$/, '')
+
+    return {
+      title: data.title,
+      date: data.date instanceof Date ? data.date.toISOString() : data.date,
+      tags: data.tags || [],
+      draft: data.draft || false,
+      summary: data.summary,
+      slug: postSlug,
+    }
+  })
+}
+
+// Sort posts by date
+function sortPosts(posts) {
+  return posts
+    .filter((post) => !post.draft)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+}
 
 const generateRssItem = (config, post) => `
   <item>
@@ -48,15 +86,18 @@ async function generateRSS(config, allBlogs, page = 'feed.xml') {
   if (publishPosts.length > 0) {
     for (const tag of Object.keys(tagData)) {
       const filteredPosts = allBlogs.filter((post) => post.tags.map((t) => slug(t)).includes(tag))
-      const rss = generateRss(config, filteredPosts, `tags/${tag}/${page}`)
-      const rssPath = path.join(outputFolder, 'tags', tag)
-      mkdirSync(rssPath, { recursive: true })
-      writeFileSync(path.join(rssPath, page), rss)
+      if (filteredPosts.length > 0) {
+        const rss = generateRss(config, sortPosts(filteredPosts), `tags/${tag}/${page}`)
+        const rssPath = path.join(outputFolder, 'tags', tag)
+        mkdirSync(rssPath, { recursive: true })
+        writeFileSync(path.join(rssPath, page), rss)
+      }
     }
   }
 }
 
 const rss = () => {
+  const allBlogs = getAllPosts()
   generateRSS(siteMetadata, allBlogs)
   console.log('RSS feed generated...')
 }

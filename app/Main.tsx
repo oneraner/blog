@@ -1,12 +1,17 @@
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import { formatDate } from 'pliny/utils/formatDate'
-import NewsletterForm from 'pliny/ui/NewsletterForm'
+import { formatDate } from '@/lib/utils/formatDate'
+import type { CoreContent } from '@/lib/utils/contentlayer'
+import type { Blog } from '@/lib/types'
 
 const MAX_DISPLAY = 5
 
-export default function Home({ posts }) {
+interface HomeProps {
+  posts: CoreContent<Blog>[]
+}
+
+export default function Home({ posts }: HomeProps) {
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -56,7 +61,7 @@ export default function Home({ posts }) {
                       <div className="text-base leading-6 font-medium">
                         <Link
                           href={`/blog/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                          className="text-secondary-500 hover:text-secondary-600 dark:hover:text-secondary-400"
                           aria-label={`Read more: "${title}"`}
                         >
                           Read more &rarr;
@@ -79,11 +84,6 @@ export default function Home({ posts }) {
           >
             All Posts &rarr;
           </Link>
-        </div>
-      )}
-      {siteMetadata.newsletter?.provider && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
         </div>
       )}
     </>
